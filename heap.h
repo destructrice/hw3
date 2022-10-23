@@ -113,18 +113,18 @@ void Heap<T,PComparator>::pop()
   
 
 }
-
+//heap constructor
 template<typename T, typename PComparator>
 Heap<T, PComparator>::Heap(int m, PComparator c) {
 this->m = m;
 this->p = c;
 }
-
+//heap destructor
 template<typename T, typename PComparator>
 Heap<T, PComparator>::~Heap() {
 
 }
-
+//push heap
 template<typename T, typename PComparator>
 void Heap<T, PComparator>::push(const T &item) {
 
@@ -136,13 +136,15 @@ void Heap<T, PComparator>::push(const T &item) {
     trickleUp(pq.size()-1);
 		}
 }
+//heapify
 template<typename T, typename PComparator>
 void Heap<T, PComparator>::heapify(int idx)
 {
+	//if the child is greater than the vector size don't do anything
    if((unsigned)(idx*m + 1) >= pq.size()) {
 		 return;
 		 }
-		 
+		 //go through all of the children
     int smallerChild = m*idx + 1; // start w/ left
 		int min = smallerChild;
 		if(smallerChild < (int) (pq.size() - 1)){
@@ -154,7 +156,7 @@ void Heap<T, PComparator>::heapify(int idx)
 			
 		}
 		}
-		
+		//go through the m children and swap until they're in order
 	if(p(pq[min], pq[idx])){
 		std::swap(pq[idx], pq[min]);
 		heapify(min);
@@ -164,15 +166,15 @@ template<typename T, typename PComparator>
 
 void Heap<T, PComparator>::trickleUp(int loc)
 {
+	//don't do anything 
 	if(loc == 0){
 		return;
 	}
-
+	//use a while loop to swap until they're in order
     int parent = (loc - 1)/m;
     while(parent >= 0 && p(pq[loc], pq[parent]))
     { std::swap(pq[parent], pq[loc]);
-        //loc = parent;
-        //parent = (loc - 1)/m;
+        
 				trickleUp(parent);
     }
 	

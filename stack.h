@@ -20,32 +20,38 @@ public:
  private:
     std::vector<T> items;   
 };
+//make a stack vector
 template <typename T>
 Stack<T>::Stack(){
     items = new std::vector<T>;
 }
+//clear everything
 template <typename T>
 Stack<T>::~Stack(){
     items.clear();
     delete items;
 }
+//push back to add
 template<typename T>
 void Stack<T>::push (T const& item)
 {
     items.push_back(item);
 }
+//pop back to pop
 template<typename T>
 void Stack<T>::pop()
 {
     assert(!items.empty());
     items.pop_back();
 }
+//return the item if it's not empty
 template<typename T>
 T const& Stack<T>::top() const
 {
     assert(!items.empty());
     return items.back();
 }
+//return the size
 template<typename T>
 size_t Stack<T>::size() const{
     return items.size();
